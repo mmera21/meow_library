@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2026_11_19_044728) do
+ActiveRecord::Schema[7.2].define(version: 2026_11_19_045646) do
   create_table "categories", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -42,7 +42,7 @@ ActiveRecord::Schema[7.2].define(version: 2026_11_19_044728) do
     t.text "description"
     t.decimal "price", precision: 8, scale: 2
     t.decimal "sale_price", precision: 8, scale: 2
-    t.boolean "on_sale"
+    t.boolean "on_sale", default: false, null: false
     t.string "open_library_key"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
