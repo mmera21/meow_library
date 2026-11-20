@@ -1,2 +1,4 @@
-<h1>Categories#show</h1>
-<p>Find me in app/views/categories/show.html.erb</p>
+<% content_for :title, "#{@category.name} | Meow Library" %>
+
+<h1 class="h3 mb-3"><%= @category.name %> <small class="text-muted">(<%= @products.size %> books)</small></h1>
+<%= render "products/grid", products: @products %>

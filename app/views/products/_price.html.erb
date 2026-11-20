@@ -1,0 +1,9 @@
+<p class="mt-auto mb-0">
+  <% if product.on_sale? && product.sale_price %>
+    <span class="badge bg-danger me-1">Sale</span>
+    <del class="text-muted small"><%= number_to_currency(product.price) %></del>
+    <strong><%= number_to_currency(product.sale_price) %></strong>
+  <% else %>
+    <strong><%= number_to_currency(product.price) %></strong>
+  <% end %>
+</p>

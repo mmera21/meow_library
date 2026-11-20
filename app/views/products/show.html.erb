@@ -1,2 +1,24 @@
-<h1>Products#show</h1>
-<p>Find me in app/views/products/show.html.erb</p>
+<% content_for :title, "#{@product.title} | Meow Library" %>
+
+<div class="row g-4">
+  <div class="col-md-4 text-center">
+    <% if @product.image.attached? %>
+      <%= image_tag @product.image.variant(:large), class: "img-fluid rounded shadow", alt: "Cover of #{@product.title}" %>
+    <% else %>
+      <div class="book-cover-placeholder rounded">🐱</div>
+    <% end %>
+  </div>
+
+  <div class="col-md-8">
+    <h1 class="h2"><%= @product.title %></h1>
+    <p class="text-muted">by <%= @product.author %></p>
+    <p>
+      <% @product.categories.each do |category| %>
+        <%= link_to category.name, category_path(category), class: "badge text-bg-secondary text-decoration-none" %>
+      <% end %>
+    </p>
+    <div class="fs-4 mb-3"><%= render "products/price", product: @product %></div>
+    <%= simple_format(@product.description) %>
+    <%= link_to "← Back to all books", products_path, class: "btn btn-outline-secondary mt-3" %>
+  </div>
+</div>

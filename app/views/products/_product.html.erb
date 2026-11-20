@@ -1,0 +1,18 @@
+<div class="col">
+  <div class="card h-100 shadow-sm">
+    <%= link_to product_path(product) do %>
+      <% if product.image.attached? %>
+        <%= image_tag product.image.variant(:thumb), class: "card-img-top book-cover", alt: "Cover of #{product.title}" %>
+      <% else %>
+        <div class="card-img-top book-cover-placeholder">🐱</div>
+      <% end %>
+    <% end %>
+    <div class="card-body d-flex flex-column">
+      <h2 class="h6 card-title">
+        <%= link_to product.title, product_path(product), class: "text-decoration-none text-dark" %>
+      </h2>
+      <p class="card-text small text-muted mb-2"><%= product.author %></p>
+      <%= render "products/price", product: product %>
+    </div>
+  </div>
+</div>

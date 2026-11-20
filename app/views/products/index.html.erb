@@ -1,2 +1,11 @@
 <h1>Products#index</h1>
 <p>Find me in app/views/products/index.html.erb</p>
+<% content_for :title, "Books | Meow Library" %>
+
+<div class="p-4 mb-4 bg-light rounded-3">
+  <h1 class="display-6">Welcome to Meow Library</h1>
+  <p class="lead mb-0">A cat friendly independent bookstore in Osborne Village, now shipping across Canada.</p>
+</div>
+
+<h2 class="h4 mb-3">All books <small class="text-muted">(<%= @products.size %>)</small></h2>
+<%= render "products/grid", products: @products %>
