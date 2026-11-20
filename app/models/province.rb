@@ -1,4 +1,5 @@
 class Province < ApplicationRecord
+  has_many :users, dependent: :restrict_with_error
   validates :name, presence: true, uniqueness: true
   validates :code, presence: true, uniqueness: true, format: { with: /\A[A-Z]{2}\z/, message: "must be 2 capital letters" }
   validates :gst_rate, :pst_rate, :hst_rate, presence: true,
