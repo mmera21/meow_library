@@ -115,6 +115,20 @@ GENRES.each do |genre_name, subject|
   puts " #{added} books"
 end
 
+# covers p
+print "Attaching covers "
+Product.where.not(cover_id: nil).find_each do |product|
+  next if product.image.attached?
+
+  url = "https://covers.openlibrary.org/b/id/#{product.cover_id}-L.jpg"
+  product.image.attach(io: URI.open(url, "User-Agent" => USER_AGENT),
+                       filename: "cover-#{product.cover_id}.jpg", content_type: "image/jpeg")
+  print "."
+rescue StandardError => e
+  puts "\n  ! Cover for #{product.title}: #{e.message}"
+end
+puts
+
 # admin user 
 AdminUser.find_or_create_by!(email: "admin@meowlibrary.ca") do |admin|
   admin.password = "password123"

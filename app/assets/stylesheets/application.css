@@ -13,3 +13,19 @@
  *= require_tree .
  *= require_self
  */
+
+ .book-cover {
+  height: 225px;
+  object-fit: contain;
+  background: #f8f5f0;
+  padding: 0.5rem;
+}
+
+.book-cover-placeholder {
+  height: 225px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+  background: #f8f5f0;
+}

@@ -1,15 +1,16 @@
 ActiveAdmin.register Product do
-  permit_params :title, :author, :description, :price, :sale_price, :on_sale, category_ids: []
+  permit_params :title, :author, :description, :price, :sale_price, :on_sale, :image, category_ids: []
 
   controller do
     def scoped_collection
-      super.includes(:categories)
+      super.includes(:categories).with_attached_image
     end
   end
 
   index do
     selectable_column
     id_column
+    column(:cover) { |product| image_tag product.image.variant(:thumb), width: 50 if product.image.attached? }
     column :title
     column :author
     column(:price) { |product| number_to_currency(product.price) }
@@ -26,6 +27,7 @@ ActiveAdmin.register Product do
 
   show do
     attributes_table do
+      row(:cover) { |product| image_tag product.image.variant(:large) if product.image.attached? }
       row :title
       row :author
       row :description
@@ -47,6 +49,8 @@ ActiveAdmin.register Product do
       f.input :price
       f.input :on_sale
       f.input :sale_price
+      f.input :image, as: :file, label: "Cover",
+                      hint: (image_tag(f.object.image.variant(:thumb)) if f.object.image.attached?)
     end
     f.inputs "Genres" do
       f.input :categories, as: :check_boxes, collection: Category.order(:name)
