@@ -115,4 +115,11 @@ GENRES.each do |genre_name, subject|
   puts " #{added} books"
 end
 
+# admin user 
+AdminUser.find_or_create_by!(email: "admin@meowlibrary.ca") do |admin|
+  admin.password = "password123"
+  admin.password_confirmation = "password123"
+end
+puts "Admin: admin@meowlibrary.ca / password123"
+
 puts "Done! #{Category.count} categories, #{Product.count} products, #{Province.count} provinces."
