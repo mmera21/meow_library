@@ -11,6 +11,7 @@ class Product < ApplicationRecord
     validates :on_sale, inclusion: { in: [true, false] }
     validates :open_library_key, uniqueness: true, allow_nil: true
     validate :sale_price_lower_than_price
+    validates :cover_id, numericality: { only_integer: true }, allow_nil: true
 
     def current_price
         on_sale? && sale_price.present? ? sale_price : price
