@@ -17,6 +17,14 @@ class Product < ApplicationRecord
         on_sale? && sale_price.present? ? sale_price : price
     end
 
+    def self.ransackable_attributes(_auth_object = nil)
+        %w[title author price on_sale created_at updated_at]
+    end
+
+    def self.ransackable_associations(_auth_object = nil)
+        %w[categories]
+    end
+
     private
 
     def sale_price_lower_than_price
